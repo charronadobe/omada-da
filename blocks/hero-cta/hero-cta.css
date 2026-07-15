@@ -1,0 +1,118 @@
+/* Block: hero-cta -- full-bleed teal CTA band.
+   Values from source computed styles (omadahealth.com section.we-put-healthcare). */
+
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: var(--brand-teal); /* rgb(0 62 72) */
+  color: var(--background-color); /* white */
+  min-height: 303px;
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Row 1: decorative background illustration (we-put-healthcare.svg).
+   Anchored to the right edge behind the content. */
+.hero-cta > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  margin: 0;
+}
+
+.hero-cta > div:first-child > div,
+.hero-cta > div:first-child picture {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  margin: 0;
+}
+
+.hero-cta > div:first-child img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: right center;
+}
+
+/* Row 2: the actual content (heading + CTA). */
+.hero-cta > div:last-child {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+}
+
+.hero-cta > div:last-child > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.hero-cta h2 {
+  margin: 0;
+  color: var(--background-color); /* white */
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.24;
+  text-align: center;
+}
+
+/* CTA link -- orange pill. Not auto-decorated in author-kit, style raw <a>. */
+.hero-cta p {
+  margin: 0;
+}
+
+.hero-cta p a:any-link {
+  display: inline-block;
+  background-color: var(--link-color); /* rgb(232 90 46) */
+  color: var(--background-color); /* white */
+  padding: 18px 30px;
+  border: 0;
+  border-radius: 28px;
+  font-family: var(--body-font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.hero-cta p a:any-link:hover {
+  background-color: rgb(210 74 34);
+}
+
+/* No-image fallback: dark text when there is no teal background image row. */
+.hero-cta.no-image * {
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .hero-cta {
+    min-height: 354px;
+    padding: 72px 32px;
+  }
+
+  .hero-cta h2 {
+    font-size: 72px;
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "variantName": "testimonial-carousel",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-07-15T12:40:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.omadahealth.com/",
+    "originPage": "Omada Health homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "testimonial"
+  },
+  "contentPattern": {
+    "structure": "rotating quote slides, each with a logo, quote, author name, designation, and read-more link",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "customer/member quote carousels with prev/next and dots",
+      "testimonial rotators on light backgrounds"
+    ],
+    "notSuitableFor": [
+      "static single quotes (use a simple quote block)",
+      "image galleries"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-15T12:40:00.000Z"
+  }
+}

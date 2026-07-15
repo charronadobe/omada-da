@@ -1,0 +1,26 @@
+:root {
+  /* Omada brand fonts are proprietary (GT Super Display, Centra No2) with no
+     public Typekit/Google source — fall back to closest system stacks. */
+  --heading-font-family: "GT Super Display", georgia, "Times New Roman", serif;
+  --body-font-family: "Centra No2", "Helvetica Neue", helvetica, arial, sans-serif;
+
+  /* colors (from source computed styles) */
+  --background-color: rgb(255 255 255);
+  --text-color: rgb(40 46 51);
+  --link-color: rgb(232 90 46);
+  --link-hover-color: rgb(0 86 179);
+  --brand-teal: rgb(0 62 72);
+
+  /* spacing */
+  --section-padding: 80px;
+  --nav-height: 67px;
+  --content-max-width: 1200px;
+
+  /* heading sizes (desktop) */
+  --heading-size-xxl: 54px;
+  --heading-size-xl: 42px;
+  --heading-size-l: 26px;
+  --heading-size-m: 32px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 24px;
+}

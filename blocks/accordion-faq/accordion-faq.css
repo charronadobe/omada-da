@@ -1,0 +1,113 @@
+/* Block: accordion-faq
+ * Source: omadahealth.com FAQ section (section.faq-accordion)
+ * Vertical list of expandable Q&A rows with a custom +/- indicator,
+ * dividers between items, brand-teal bold questions, centered layout.
+ */
+
+.accordion-faq {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--text-color);
+}
+
+/* --- Accordion item (native <details>) --- */
+.accordion-faq .accordion-faq-item {
+  border-top: 1px solid rgb(0 62 72 / 15%);
+  padding: 0;
+}
+
+.accordion-faq .accordion-faq-item:last-child {
+  border-bottom: 1px solid rgb(0 62 72 / 15%);
+}
+
+/* --- Summary / question label --- */
+.accordion-faq .accordion-faq-item-label {
+  position: relative;
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  padding: 24px 48px 24px 0;
+  outline: none;
+}
+
+.accordion-faq .accordion-faq-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-faq .accordion-faq-item-label h6 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--brand-teal);
+}
+
+/* --- Custom +/- indicator (flips with details[open]) --- */
+.accordion-faq .accordion-faq-item-label::before,
+.accordion-faq .accordion-faq-item-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  background-color: var(--brand-teal);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* horizontal bar (always visible) */
+.accordion-faq .accordion-faq-item-label::before {
+  right: 4px;
+  width: 18px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+/* vertical bar (hidden when open -> becomes minus) */
+.accordion-faq .accordion-faq-item-label::after {
+  right: 12px;
+  width: 2px;
+  height: 18px;
+  transform: translateY(-50%);
+}
+
+.accordion-faq .accordion-faq-item[open] .accordion-faq-item-label::after {
+  transform: translateY(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+/* --- Answer body --- */
+.accordion-faq .accordion-faq-item-body {
+  padding: 0 0 24px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.accordion-faq .accordion-faq-item-body p {
+  margin: 0 0 1em;
+}
+
+.accordion-faq .accordion-faq-item-body p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-faq .accordion-faq-item-body ul,
+.accordion-faq .accordion-faq-item-body ol {
+  margin: 0 0 1em;
+}
+
+.accordion-faq .accordion-faq-item-body a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.accordion-faq .accordion-faq-item-body a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .accordion-faq .accordion-faq-item-label h6 {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,193 @@
+/* Block: tabs-condition -- values from source computed styles (omadahealth.com) */
+
+.tabs-condition {
+  color: var(--text-color);
+  padding: 40px 0;
+}
+
+/* ---------- Tab list (horizontal nav across the top) ---------- */
+.tabs-condition .tabs-condition-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin: 0 0 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.tabs-condition .tabs-condition-list button.tabs-condition-tab {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-top: 3px solid rgb(60 69 77 / 25%);
+  border-radius: 0;
+  background: transparent;
+  color: rgb(60 69 77);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-l);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: left;
+  white-space: normal;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* the source markup nests an <a> inside each tab; neutralise it so the
+   button controls all styling */
+.tabs-condition .tabs-condition-list button.tabs-condition-tab a,
+.tabs-condition .tabs-condition-list button.tabs-condition-tab a:any-link {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.tabs-condition .tabs-condition-list button.tabs-condition-tab:hover {
+  color: var(--link-color);
+}
+
+.tabs-condition .tabs-condition-list button.tabs-condition-tab[aria-selected='true'] {
+  border-top-color: var(--link-color);
+  color: var(--link-color);
+  cursor: default;
+}
+
+/* ---------- Tab panels ---------- */
+.tabs-condition .tabs-condition-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tabs-condition .tabs-condition-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* Panel inner wrapper holds the image (in a <p>) and the text content */
+.tabs-condition .tabs-condition-panel > div {
+  display: block;
+}
+
+/* Image cell (bare <img> gets wrapped in a <p> by EDS) */
+.tabs-condition .tabs-condition-panel > div > p:has(picture),
+.tabs-condition .tabs-condition-panel > div > p:has(img) {
+  margin: 0 0 24px;
+  width: 100%;
+}
+
+.tabs-condition .tabs-condition-panel picture {
+  display: block;
+}
+
+.tabs-condition .tabs-condition-panel img {
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* Heading */
+.tabs-condition .tabs-condition-panel h6 {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-xxl);
+  font-weight: 700;
+  line-height: 1.36;
+}
+
+/* drop the empty second heading emitted by the source markup */
+.tabs-condition .tabs-condition-panel h6:empty {
+  display: none;
+  margin: 0;
+}
+
+/* Bullet list with custom orange markers */
+.tabs-condition .tabs-condition-panel ul {
+  margin: 0 0 2px;
+  padding: 0;
+  list-style: none;
+}
+
+.tabs-condition .tabs-condition-panel ul li {
+  position: relative;
+  margin: 0 0 14px;
+  padding-left: 21px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  line-height: 1.5;
+}
+
+.tabs-condition .tabs-condition-panel ul li::before {
+  content: '';
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--link-color);
+  transform: translateY(-50%);
+}
+
+/* CTA text link ("Omada for ...") */
+.tabs-condition .tabs-condition-panel p:has(a) {
+  margin: 24px 0 0;
+}
+
+.tabs-condition .tabs-condition-panel a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--link-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tabs-condition .tabs-condition-panel a::after {
+  content: '\2192';
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.tabs-condition .tabs-condition-panel a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Desktop ---------- */
+@media (width >= 900px) {
+  .tabs-condition {
+    padding: 80px 0;
+  }
+
+  .tabs-condition .tabs-condition-list button.tabs-condition-tab {
+    flex: 1 1 0;
+    font-size: var(--body-font-size-xxl);
+    padding-top: 16px;
+  }
+
+  /* Two-column layout. The panel's inner <div> holds the image (in a <p>)
+     followed by stacked text elements. Because the text elements are separate
+     siblings (no wrapper), a float keeps the text flowing tightly in the left
+     column while the image sits in the right column. The text block is then
+     vertically centered against the image via a translate on the text group. */
+  .tabs-condition .tabs-condition-panel > div {
+    display: flow-root;
+  }
+
+  /* image on the right */
+  .tabs-condition .tabs-condition-panel > div > p:has(picture),
+  .tabs-condition .tabs-condition-panel > div > p:has(img) {
+    float: right;
+    width: 55%;
+    margin: 0 0 0 80px;
+  }
+
+  /* text stays in the remaining left column */
+  .tabs-condition .tabs-condition-panel > div > h6:first-of-type {
+    margin-top: 0;
+  }
+}

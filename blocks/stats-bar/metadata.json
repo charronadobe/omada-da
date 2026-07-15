@@ -1,0 +1,36 @@
+{
+  "variantName": "stats-bar",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-15T12:40:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.omadahealth.com/",
+    "originPage": "Omada Health homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "metrics"
+  },
+  "contentPattern": {
+    "structure": "row of large numeric stats, each with a value and a short description",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "KPI / metric strips with 3-5 numeric highlights",
+      "ROI or outcome stat bands on light backgrounds"
+    ],
+    "notSuitableFor": [
+      "cards with imagery (use cards)",
+      "long-form content"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-15T12:40:00.000Z"
+  }
+}

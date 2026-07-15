@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.omadahealth.com/"
+      ],
+      "representativeUrl": "https://www.omadahealth.com/",
+      "coverageGaps": [],
+      "description": "Omada Health homepage: hero banner with video, platform benefit cards, tabbed condition feature slider, FAQ accordion, and a closing CTA section.",
+      "blocks": [
+        {
+          "name": "stats-bar",
+          "instances": ["section.build-roi-counter"]
+        },
+        {
+          "name": "hero-video",
+          "instances": ["section.hero-banner.banner-video", ".hero-banner"]
+        },
+        {
+          "name": "cards-benefit",
+          "instances": ["section.cards__card.platform-card", ".platform-cards"]
+        },
+        {
+          "name": "section-conditions-tabs",
+          "instances": ["section.features-tab-slider.module"],
+          "section": "light"
+        },
+        {
+          "name": "tabs-condition",
+          "instances": ["section.features-tab-slider.module", ".features-tab-slider"]
+        },
+        {
+          "name": "testimonial-carousel",
+          "instances": ["section.testimonial-slider-section"]
+        },
+        {
+          "name": "section-testimonial-video",
+          "instances": ["#main-content > div.row-fluid-wrapper.row-depth-1.row-number-6.dnd_area-row-2-padding.dnd-section"],
+          "section": "light"
+        },
+        {
+          "name": "video-embed",
+          "instances": ["#main-content > div.row-fluid-wrapper.row-depth-1.row-number-6.dnd_area-row-2-padding.dnd-section"]
+        },
+        {
+          "name": "section-faq-accordion",
+          "instances": ["#main-content > div.row-fluid-wrapper.row-depth-1.row-number-11.dnd-section.dnd_area-row-5-padding"],
+          "section": "light"
+        },
+        {
+          "name": "accordion-faq",
+          "instances": ["section.faq-accordion", ".faq-accordion__content"]
+        },
+        {
+          "name": "hero-cta",
+          "instances": ["section.we-put-healthcare"]
+        }
+      ]
+    }
+  ]
+}

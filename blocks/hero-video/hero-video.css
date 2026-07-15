@@ -1,0 +1,122 @@
+/* Block: hero-video -- dark hero with full-width background video/image.
+   Values extracted from source computed styles (omadahealth.com). */
+
+/* Full-width: escape the section max-width wrapper */
+.hero-video-container .hero-video-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-video {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 0 0;
+  background-color: var(--brand-teal);
+  color: var(--background-color);
+  min-height: 420px;
+}
+
+/* --- Background media layer (video / picture) --- */
+.hero-video .hero-video-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-video .hero-video-media video,
+.hero-video .hero-video-media img,
+.hero-video .hero-video-media picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Content column --- */
+.hero-video .hero-video-content {
+  position: relative;
+  z-index: 1;
+  padding: 48px 24px 64px;
+}
+
+.hero-video .hero-video-content > div {
+  max-width: 585px;
+}
+
+.hero-video h6 {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--body-font-family);
+  line-height: 1.36;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--background-color);
+  margin: 0 0 17px;
+}
+
+.hero-video h1 {
+  font-size: 40px;
+  font-weight: 400;
+  font-family: var(--heading-font-family);
+  line-height: 1.1;
+  color: var(--background-color);
+  margin: 0 0 20px;
+}
+
+.hero-video p {
+  font-size: 18px;
+  font-family: var(--body-font-family);
+  line-height: 1.6;
+  color: var(--background-color);
+  margin: 0 0 24px;
+}
+
+/* --- CTA (author-kit does not add .button; target the link directly) --- */
+.hero-video .hero-video-content a:any-link {
+  display: inline-block;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  padding: 18px 30px;
+  border-radius: 28px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.hero-video .hero-video-content a:hover {
+  filter: brightness(0.92);
+}
+
+.hero-video .hero-video-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Light variant fallback (no media) --- */
+.hero-video.no-image {
+  background-color: var(--background-color);
+}
+
+.hero-video.no-image h1,
+.hero-video.no-image h6,
+.hero-video.no-image p {
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .hero-video {
+    min-height: 620px;
+  }
+
+  .hero-video .hero-video-content {
+    padding: 94px 0 200px 150px;
+  }
+
+  .hero-video .hero-video-content > div {
+    max-width: 50%;
+  }
+
+  .hero-video h1 {
+    font-size: 54px;
+  }
+}

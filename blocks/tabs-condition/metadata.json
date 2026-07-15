@@ -1,0 +1,37 @@
+{
+  "variantName": "tabs-condition",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-07-15T12:09:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.omadahealth.com/",
+    "originPage": "Omada Health homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "tab labels + switchable panels each with image + text",
+    "buttonCount": 0,
+    "imageCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "tabbed feature / condition sliders with per-tab image and copy",
+      "grouping closely related content under selectable tabs"
+    ],
+    "notSuitableFor": [
+      "expandable Q&A (use accordion)",
+      "single-panel content"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-15T12:09:00.000Z"
+  }
+}

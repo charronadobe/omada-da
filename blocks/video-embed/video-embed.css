@@ -1,0 +1,112 @@
+/*
+ * Video Embed Block
+ * Centered heading above a responsive 16:9 video embed.
+ * Source: omadahealth.com "Watch How Anthony..." section
+ * - content constrained to 1200px, centered
+ * - heading 42px, centered, GT Super Display, margin-bottom 20px
+ * - video 16:9, full width of container
+ */
+
+.video-embed {
+  max-width: var(--content-max-width, 1200px);
+  margin: 0 auto;
+  padding: 0 0 20px;
+}
+
+/* Authored heading/intro sits above the video, centered */
+.video-embed .video-embed-header {
+  text-align: center;
+}
+
+.video-embed .video-embed-header h2 {
+  margin: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-xl, 42px);
+  font-weight: 700;
+  line-height: 1.24;
+  color: var(--text-color);
+}
+
+.video-embed .video-embed-header :is(h1, h2, h3, h4, h5, h6):last-child,
+.video-embed .video-embed-header p:last-child {
+  margin-bottom: 20px;
+}
+
+/* Responsive 16:9 video wrapper */
+.video-embed .video-embed-video {
+  width: 100%;
+}
+
+.video-embed .video-embed-video > div {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.video-embed .video-embed-video iframe,
+.video-embed .video-embed-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* reserve space to avoid layout shift before the embed loads */
+.video-embed[data-embed-loaded='false']:not(.placeholder) .video-embed-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* placeholder (poster + play button) support */
+.video-embed .video-embed-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.video-embed .video-embed-placeholder > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.video-embed[data-embed-loaded='true'] .video-embed-placeholder,
+.video-embed[data-embed-loaded='false'] .video-embed-placeholder + * {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+.video-embed .video-embed-placeholder picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-embed .video-embed-placeholder-play button {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  outline: 2px solid;
+  padding: 0;
+}
+
+.video-embed .video-embed-placeholder-play button::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 24px;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 18px solid;
+  top: 50%;
+  left: calc(50% + 2px);
+  transform: translate(-50%, -50%);
+}

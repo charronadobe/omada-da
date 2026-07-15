@@ -1,0 +1,37 @@
+{
+  "variantName": "video-embed",
+  "baseBlock": "video",
+  "version": "1.0.0",
+  "created": "2026-07-15T12:09:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.omadahealth.com/",
+    "originPage": "Omada Health homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "testimonial",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "single embedded video (Vimeo/YouTube) referenced by link",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "standalone testimonial or explainer videos",
+      "embedded Vimeo or YouTube players on light backgrounds"
+    ],
+    "notSuitableFor": [
+      "background hero videos (use hero variant)",
+      "multiple videos in a gallery (use carousel)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-15T12:09:00.000Z"
+  }
+}

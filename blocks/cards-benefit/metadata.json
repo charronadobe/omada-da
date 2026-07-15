@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-benefit",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-15T12:09:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.omadahealth.com/",
+    "originPage": "Omada Health homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "grid of items with image + title + description",
+    "buttonCount": 0,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "benefit / feature card grids on light backgrounds",
+      "3-up product or program highlight grids with imagery"
+    ],
+    "notSuitableFor": [
+      "text-only card lists",
+      "side-by-side comparison layouts (use columns)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-15T12:09:00.000Z"
+  }
+}

@@ -1,0 +1,125 @@
+.testimonial-carousel {
+  padding: 48px 24px;
+  max-width: var(--content-max-width, 1200px);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonial-carousel-track {
+  position: relative;
+}
+
+.testimonial-carousel-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.testimonial-carousel-slide[aria-hidden="true"] {
+  display: none;
+}
+
+.testimonial-carousel-logo img {
+  width: auto;
+  max-height: 60px;
+}
+
+.testimonial-carousel-body {
+  max-width: 760px;
+}
+
+.testimonial-carousel-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 24px;
+}
+
+.testimonial-carousel-body p {
+  font-family: var(--body-font-family);
+  margin: 4px 0;
+  color: var(--text-color);
+}
+
+.testimonial-carousel-body a {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--link-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.testimonial-carousel-body a:hover {
+  text-decoration: underline;
+}
+
+.testimonial-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.testimonial-carousel-prev,
+.testimonial-carousel-next {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--brand-teal);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.testimonial-carousel-prev::before,
+.testimonial-carousel-next::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--brand-teal);
+  border-right: 2px solid var(--brand-teal);
+}
+
+.testimonial-carousel-prev::before {
+  transform: translate(-30%, -50%) rotate(-135deg);
+}
+
+.testimonial-carousel-next::before {
+  transform: translate(-70%, -50%) rotate(45deg);
+}
+
+.testimonial-carousel-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.testimonial-carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(60 69 77 / 25%);
+  padding: 0;
+  cursor: pointer;
+}
+
+.testimonial-carousel-dots button[aria-selected="true"] {
+  background: var(--link-color);
+}
+
+@media (width >= 900px) {
+  .testimonial-carousel {
+    padding: 72px 24px;
+  }
+
+  .testimonial-carousel-body h4 {
+    font-size: 34px;
+  }
+}
