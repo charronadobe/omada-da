@@ -174,7 +174,8 @@ header {
     }
 
     > .block-content {
-      border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+      border-bottom: 1px solid
+        light-dark(var(--color-gray-200), var(--color-gray-600));
     }
 
     .action-wrapper {
@@ -201,7 +202,8 @@ header {
     }
 
     .main-nav-item {
-      border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+      border-bottom: 1px solid
+        light-dark(var(--color-gray-200), var(--color-gray-600));
 
       > * {
         max-width: var(--grid-container-width);
@@ -221,7 +223,8 @@ header {
 
     .is-open {
       .main-nav-link {
-        border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+        border-bottom: 1px solid
+          light-dark(var(--color-gray-200), var(--color-gray-600));
       }
 
       .menu,
@@ -242,7 +245,8 @@ header {
     }
 
     .brand-section {
-      border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-600));
+      border-bottom: 1px solid
+        light-dark(var(--color-gray-200), var(--color-gray-600));
     }
   }
 }
@@ -283,7 +287,8 @@ header {
     .mega-menu {
       > .fragment-content {
         display: grid;
-        grid-template-columns: repeat(var(--mega-columns), 1fr);
+        /* grid-template-columns: repeat(var(--mega-columns), 1fr); */
+        grid-template-columns: repeat(1, 1fr);
         max-width: var(--grid-container-width);
         margin: 0 auto;
 
