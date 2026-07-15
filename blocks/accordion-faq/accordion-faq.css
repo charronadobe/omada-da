@@ -5,9 +5,10 @@
  */
 
 .accordion-faq {
-  max-width: 800px;
+  max-width: var(--content-max-width, 1200px);
   margin: 0 auto;
-  padding: 0;
+  padding: 0 40px;
+  box-sizing: border-box;
   color: var(--text-color);
 }
 

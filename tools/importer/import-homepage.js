@@ -2,7 +2,6 @@
 /* global WebImporter */
 
 // PARSER IMPORTS
-import statsBarParser from './parsers/stats-bar.js';
 import heroVideoParser from './parsers/hero-video.js';
 import cardsBenefitParser from './parsers/cards-benefit.js';
 import tabsConditionParser from './parsers/tabs-condition.js';
@@ -16,7 +15,6 @@ import omadaCleanupTransformer from './transformers/omada-cleanup.js';
 
 // PARSER REGISTRY
 const parsers = {
-  'stats-bar': statsBarParser,
   'hero-video': heroVideoParser,
   'cards-benefit': cardsBenefitParser,
   'tabs-condition': tabsConditionParser,
@@ -39,10 +37,6 @@ const PAGE_TEMPLATE = {
     'https://www.omadahealth.com/',
   ],
   blocks: [
-    {
-      name: 'stats-bar',
-      instances: ['section.build-roi-counter'],
-    },
     {
       name: 'hero-video',
       instances: ['section.hero-banner.banner-video', '.hero-banner'],

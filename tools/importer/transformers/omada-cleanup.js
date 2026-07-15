@@ -24,6 +24,9 @@ export default function transform(hookName, element, payload) {
       '#hs-web-interactives-bottom-anchor',
       '#hs-web-interactives-floating-container',
       '#hs-interactives-modal-overlay',
+      // Hidden org-facing "Build better long-term ROI" stats counter — not shown
+      // on the visible For Individuals homepage, so it must not appear in content.
+      'section.build-roi-counter',
     ]);
   }
 

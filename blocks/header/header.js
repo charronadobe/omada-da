@@ -1,197 +1,217 @@
-import { getConfig, getMetadata } from '../../scripts/ak.js';
-import { loadFragment } from '../fragment/fragment.js';
-import { setColorScheme } from '../section-metadata/section-metadata.js';
+const NAV_PATH = '/content/nav.plain.html';
+const DESKTOP_MQ = window.matchMedia('(min-width: 900px)');
 
-const { locale } = getConfig();
+async function fetchNav() {
+  let resp = await fetch(NAV_PATH);
+  if (!resp.ok) resp = await fetch('/nav.plain.html');
+  if (!resp.ok) return null;
+  const html = await resp.text();
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp;
+}
 
-const HEADER_PATH = '/fragments/nav/header';
-const HEADER_ACTIONS = [
-  '/tools/widgets/scheme',
-  '/tools/widgets/language',
-  '/tools/widgets/toggle',
-];
+function closeAllMenus(scope) {
+  scope.querySelectorAll('.nav-item.is-open').forEach((el) => el.classList.remove('is-open'));
+}
 
-function closeAllMenus() {
-  const openMenus = document.body.querySelectorAll('header .is-open');
-  for (const openMenu of openMenus) {
-    openMenu.classList.remove('is-open');
+function buildUtilityRow(section) {
+  const row = document.createElement('div');
+  row.className = 'nav-utility';
+
+  const brand = document.createElement('a');
+  brand.className = 'nav-brand';
+  const logoLink = section.querySelector('a');
+  const logoImg = section.querySelector('img');
+  brand.href = logoLink ? logoLink.getAttribute('href') : '/';
+  if (logoImg) brand.append(logoImg);
+  row.append(brand);
+
+  const tools = document.createElement('div');
+  tools.className = 'nav-utility-tools';
+
+  const list = section.querySelector('ul');
+  if (list) {
+    const ul = document.createElement('ul');
+    ul.className = 'nav-utility-links';
+    [...list.querySelectorAll(':scope > li')].forEach((li) => {
+      const a = li.querySelector('a');
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = a.getAttribute('href');
+      link.textContent = a.textContent.trim();
+      item.append(link);
+      ul.append(item);
+    });
+    tools.append(ul);
   }
+
+  const search = document.createElement('button');
+  search.className = 'nav-search-toggle';
+  search.type = 'button';
+  search.setAttribute('aria-label', 'Search');
+  tools.append(search);
+
+  row.append(tools);
+  return row;
 }
 
-function docClose(e) {
-  if (e.target.closest('header')) return;
-  closeAllMenus();
-}
+function buildMegaMenu(li) {
+  // Promo block = leading h6 + following <p>s until the sub-<ul>
+  const subList = li.querySelector(':scope > ul');
+  if (!subList) return null;
 
-function toggleMenu(menu) {
-  const isOpen = menu.classList.contains('is-open');
-  closeAllMenus();
-  if (isOpen) {
-    document.removeEventListener('click', docClose);
-    return;
+  const panel = document.createElement('div');
+  panel.className = 'nav-mega megamenu-panel';
+
+  const promo = document.createElement('div');
+  promo.className = 'nav-mega-promo';
+  const heading = li.querySelector(':scope > h6');
+  if (heading) {
+    const h = document.createElement('a');
+    const hLink = heading.querySelector('a');
+    h.className = 'nav-mega-promo-title';
+    h.href = hLink ? hLink.getAttribute('href') : '#';
+    h.textContent = heading.textContent.trim();
+    promo.append(h);
   }
-
-  // Setup the global close event
-  document.addEventListener('click', docClose);
-  menu.classList.add('is-open');
-}
-
-function decorateLanguage(btn) {
-  const section = btn.closest('.section');
-  btn.addEventListener('click', async () => {
-    let menu = section.querySelector('.language.menu');
-    if (!menu) {
-      const content = document.createElement('div');
-      content.classList.add('block-content');
-      const fragment = await loadFragment(`${locale.prefix}${HEADER_PATH}/languages`);
-      menu = document.createElement('div');
-      menu.className = 'language menu';
-      menu.append(fragment);
-      content.append(menu);
-      section.append(content);
-    }
-    toggleMenu(section);
-  });
-}
-
-function decorateScheme(btn) {
-  btn.addEventListener('click', async () => {
-    const { body } = document;
-
-    let currPref = localStorage.getItem('color-scheme');
-    if (!currPref) {
-      currPref = matchMedia('(prefers-color-scheme: dark)')
-        .matches ? 'dark-scheme' : 'light-scheme';
-    }
-
-    const theme = currPref === 'dark-scheme'
-      ? { add: 'light-scheme', remove: 'dark-scheme' }
-      : { add: 'dark-scheme', remove: 'light-scheme' };
-
-    body.classList.remove(theme.remove);
-    body.classList.add(theme.add);
-    localStorage.setItem('color-scheme', theme.add);
-    // Re-calculatie section schemes
-    const sections = document.querySelectorAll('.section');
-    for (const section of sections) {
-      setColorScheme(section);
+  // paragraphs between heading and sublist: description + Learn More link
+  li.querySelectorAll(':scope > p').forEach((p, idx) => {
+    if (idx === 0) return; // first <p> is the trigger label itself
+    const a = p.querySelector('a');
+    if (a) {
+      const link = document.createElement('a');
+      link.className = 'nav-mega-promo-cta';
+      link.href = a.getAttribute('href');
+      link.textContent = a.textContent.trim();
+      promo.append(link);
+    } else {
+      const desc = document.createElement('p');
+      desc.className = 'nav-mega-promo-desc';
+      desc.textContent = p.textContent.trim();
+      promo.append(desc);
     }
   });
-}
+  panel.append(promo);
 
-function decorateNavToggle(btn) {
-  btn.addEventListener('click', () => {
-    const header = document.body.querySelector('header');
-    if (header) header.classList.toggle('is-mobile-open');
+  const grid = document.createElement('ul');
+  grid.className = 'nav-mega-list';
+  [...subList.querySelectorAll(':scope > li')].forEach((sub) => {
+    const a = sub.querySelector('a');
+    const img = sub.querySelector('img');
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = a.getAttribute('href');
+    if (img) link.append(img);
+    const span = document.createElement('span');
+    span.textContent = a.textContent.trim();
+    link.append(span);
+    item.append(link);
+    grid.append(item);
   });
+  panel.append(grid);
+  return panel;
 }
 
-async function decorateAction(header, pattern) {
-  const link = header.querySelector(`[href*="${pattern}"]`);
-  if (!link) return;
-
-  const icon = link.querySelector('.icon');
-  const text = link.textContent;
-  const btn = document.createElement('button');
-  if (icon) btn.append(icon);
-  if (text) {
-    const textSpan = document.createElement('span');
-    textSpan.className = 'text';
-    textSpan.textContent = text;
-    btn.append(textSpan);
-  }
-  const wrapper = document.createElement('div');
-  wrapper.className = `action-wrapper ${icon.classList[1].replace('icon-', '')}`;
-  wrapper.append(btn);
-  link.parentElement.parentElement.replaceChild(wrapper, link.parentElement);
-
-  if (pattern === '/tools/widgets/language') decorateLanguage(btn);
-  if (pattern === '/tools/widgets/scheme') decorateScheme(btn);
-  if (pattern === '/tools/widgets/toggle') decorateNavToggle(btn);
-}
-
-function decorateMenu() {
-  // TODO: finish single menu support
-  return null;
-}
-
-function decorateMegaMenu(li) {
-  const menu = li.querySelector('.fragment-content');
-  if (!menu) return null;
-  const wrapper = document.createElement('div');
-  wrapper.className = 'mega-menu';
-  wrapper.append(menu);
-  li.append(wrapper);
-  return wrapper;
-}
-
-function decorateNavItem(li) {
-  li.classList.add('main-nav-item');
-  const link = li.querySelector(':scope > p > a');
-  if (link) link.classList.add('main-nav-link');
-  const menu = decorateMegaMenu(li) || decorateMenu(li);
-  if (!(menu || link)) return;
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleMenu(li);
-  });
-}
-
-function decorateBrandSection(section) {
-  section.classList.add('brand-section');
-  const brandLink = section.querySelector('a');
-  const [, text] = brandLink.childNodes;
-  const span = document.createElement('span');
-  span.className = 'brand-text';
-  span.append(text);
-  brandLink.append(span);
-}
-
-function decorateNavSection(section) {
-  section.classList.add('main-nav-section');
-  const navContent = section.querySelector('.default-content');
-  const navList = section.querySelector('ul');
-  if (!navList) return;
-  navList.classList.add('main-nav-list');
-
+function buildMainNav(section) {
   const nav = document.createElement('nav');
-  nav.append(navList);
-  navContent.append(nav);
+  nav.className = 'nav-main';
+  const list = section.querySelector('ul');
+  const ul = document.createElement('ul');
+  ul.className = 'nav-main-list';
 
-  const mainNavItems = section.querySelectorAll('nav > ul > li');
-  for (const navItem of mainNavItems) {
-    decorateNavItem(navItem);
+  [...list.querySelectorAll(':scope > li')].forEach((li) => {
+    const item = document.createElement('li');
+    item.className = 'nav-item';
+    const triggerLink = li.querySelector(':scope > p > a');
+    const link = document.createElement('a');
+    link.className = 'nav-main-link';
+    link.href = triggerLink ? triggerLink.getAttribute('href') : '#';
+    link.textContent = triggerLink ? triggerLink.textContent.trim() : '';
+
+    const mega = buildMegaMenu(li);
+    if (mega) {
+      item.classList.add('has-mega');
+      const caret = document.createElement('span');
+      caret.className = 'nav-caret';
+      link.append(caret);
+      item.append(link, mega);
+      item.addEventListener('mouseenter', () => {
+        if (DESKTOP_MQ.matches) item.classList.add('is-open');
+      });
+      item.addEventListener('mouseleave', () => {
+        if (DESKTOP_MQ.matches) item.classList.remove('is-open');
+      });
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const open = item.classList.contains('is-open');
+        closeAllMenus(ul);
+        if (!open) item.classList.add('is-open');
+      });
+    } else {
+      item.append(link);
+    }
+    ul.append(item);
+  });
+
+  nav.append(ul);
+  return nav;
+}
+
+function buildActions(section) {
+  const wrap = document.createElement('div');
+  wrap.className = 'nav-actions';
+  const list = section.querySelector('ul');
+  [...list.querySelectorAll(':scope > li')].forEach((li, idx) => {
+    const a = li.querySelector('a');
+    const link = document.createElement('a');
+    link.href = a.getAttribute('href');
+    link.textContent = a.textContent.trim();
+    // Last action is the primary CTA
+    link.className = idx === list.children.length - 1 ? 'nav-cta' : 'nav-login';
+    wrap.append(link);
+  });
+  return wrap;
+}
+
+function onResize(header) {
+  if (DESKTOP_MQ.matches) {
+    header.classList.remove('is-mobile-open');
+    closeAllMenus(header);
   }
 }
 
-async function decorateActionSection(section) {
-  section.classList.add('actions-section');
-}
+export default async function decorate(header) {
+  const nav = await fetchNav();
+  if (!nav) return;
+  const sections = [...nav.children].filter((el) => el.tagName === 'DIV');
 
-async function decorateHeader(fragment) {
-  const sections = fragment.querySelectorAll(':scope > .section');
-  if (sections[0]) decorateBrandSection(sections[0]);
-  if (sections[1]) decorateNavSection(sections[1]);
-  if (sections[2]) decorateActionSection(sections[2]);
+  const wrapper = document.createElement('div');
+  wrapper.className = 'nav-wrapper';
 
-  for (const pattern of HEADER_ACTIONS) {
-    decorateAction(fragment, pattern);
-  }
-}
+  // Row 1: utility bar (logo + For Individuals/Organizations + search)
+  if (sections[0]) wrapper.append(buildUtilityRow(sections[0]));
 
-/**
- * loads and decorates the header
- * @param {Element} el The header element
- */
-export default async function init(el) {
-  const headerMeta = getMetadata('header');
-  const path = headerMeta || HEADER_PATH;
-  try {
-    const fragment = await loadFragment(`${locale.prefix}${path}`);
-    fragment.classList.add('header-content');
-    await decorateHeader(fragment);
-    el.append(fragment);
-  } catch (e) {
-    throw Error(e);
-  }
+  // Row 2: main nav (megamenus) + actions (Member Login + CTA)
+  const mainRow = document.createElement('div');
+  mainRow.className = 'nav-main-row';
+  if (sections[1]) mainRow.append(buildMainNav(sections[1]));
+
+  const hamburger = document.createElement('button');
+  hamburger.className = 'nav-hamburger';
+  hamburger.type = 'button';
+  hamburger.setAttribute('aria-label', 'Menu');
+  hamburger.innerHTML = '<span></span><span></span><span></span>';
+  hamburger.addEventListener('click', () => {
+    header.classList.toggle('is-mobile-open');
+    hamburger.classList.toggle('is-active');
+  });
+
+  if (sections[2]) mainRow.append(buildActions(sections[2]));
+  wrapper.append(mainRow);
+  wrapper.append(hamburger);
+
+  header.append(wrapper);
+
+  DESKTOP_MQ.addEventListener('change', () => onResize(header));
 }

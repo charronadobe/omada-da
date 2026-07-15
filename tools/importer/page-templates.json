@@ -13,10 +13,6 @@
       "description": "Omada Health homepage: hero banner with video, platform benefit cards, tabbed condition feature slider, FAQ accordion, and a closing CTA section.",
       "blocks": [
         {
-          "name": "stats-bar",
-          "instances": ["section.build-roi-counter"]
-        },
-        {
           "name": "hero-video",
           "instances": ["section.hero-banner.banner-video", ".hero-banner"]
         },

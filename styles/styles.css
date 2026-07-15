@@ -306,10 +306,61 @@ a {
     max-width: var(--grid-container-width);
     margin: 0 auto;
   }
+
+  /* Blocks share one full-width block-content wrapper; constrain each block's
+     content to the page width individually (heroes stay full-bleed). */
+  > .block-content {
+    max-width: none;
+    margin: 0;
+  }
+
+  > .block-content > .cards-benefit,
+  > .block-content > .video-embed,
+  > .block-content > .testimonial-carousel,
+  > .block-content > .accordion-faq {
+    max-width: var(--grid-container-width);
+    margin-inline: auto;
+  }
+
+  /* Conditions tab slider sits on a full-bleed grey-to-white gradient (source),
+     with its inner content constrained to the page width. */
+  > .block-content > .tabs-condition {
+    background-image: linear-gradient(#e1e5e8, #fff 99%);
+  }
 }
 
 .section.light {
-  background-color: #f5f8f8;
+  background-color: #fff;
+}
+
+/* Collapsible disclaimer (matches source: hidden until heading clicked) */
+.disclaimer-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disclaimer-toggle::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.disclaimer-toggle[aria-expanded="true"]::after {
+  transform: rotate(-135deg);
+}
+
+.disclaimer-body {
+  display: none;
+}
+
+.disclaimer-toggle[aria-expanded="true"] + .disclaimer-body {
+  display: block;
 }
 
 .section.dark {
